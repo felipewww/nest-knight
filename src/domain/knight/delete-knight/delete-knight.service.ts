@@ -2,18 +2,25 @@ import { Injectable } from '@nestjs/common';
 import {BaseService} from "@/domain/base-service";
 import {KnightRepo} from "@/domain/knight/Knight.repo";
 import {IDeleteKnightSO} from "@/domain/knight/knight.dto";
+import {HeroRepo} from "@/domain/knight/Hero.repo";
 
-// todo - confirmar BOOL com oretorno
 @Injectable()
 export class DeleteKnightService extends BaseService<boolean> {
     constructor(
-        private knightRepo: KnightRepo
+        private knightRepo: KnightRepo,
+        private heroRepo: HeroRepo,
     ) {
         super();
     }
     
     async handle(dto: IDeleteKnightSO): Promise<boolean> {
-        console.log(`delete ${dto.id} success`);
+        const knight = await this.knightRepo.get(dto.id)
+        
+        if (knight.length) {
+            await this.heroRepo.save(knight[0]);
+            await this.knightRepo.delete(dto.id)
+        }
+        
         return Promise.resolve(true);
     }
 }

@@ -31,4 +31,8 @@ export class KnightRepo {
         
         return entities;
     }
+    
+    delete(id: any) {
+        return this.source.delete(id)
+    }
 }

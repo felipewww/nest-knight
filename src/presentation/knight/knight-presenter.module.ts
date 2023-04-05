@@ -1,5 +1,5 @@
 import { Module } from '@nestjs/common';
-import { KnightController } from './post-knight/knight.controller';
+import { KnightController } from '@/presentation/knight/knight/knight.controller';
 import {KnightModule} from "@/domain/knight/knight.module";
 import {WeaponModule} from "@/domain/weapon/weapon.module";
 

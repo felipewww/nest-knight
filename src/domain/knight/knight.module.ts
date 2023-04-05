@@ -5,6 +5,8 @@ import { SaveKnightService } from './save-knight/save-knight.service';
 import {KnightRepo} from "@/domain/knight/Knight.repo";
 import {KnightSource} from "@/data/knight.model";
 import {EntityDtoAdapter} from "@/domain/EntityDtoAdapter";
+import {HeroSource} from "@/data/heroes.model";
+import {HeroRepo} from "@/domain/knight/Hero.repo";
 
 @Module({
     imports: [
@@ -15,6 +17,8 @@ import {EntityDtoAdapter} from "@/domain/EntityDtoAdapter";
         SaveKnightService,
         KnightRepo,
         KnightSource, //todo - isso poderia estar num modulo em DATA, certo?
+        HeroRepo,
+        HeroSource,
         EntityDtoAdapter
     ],
     exports: [DeleteKnightService,
