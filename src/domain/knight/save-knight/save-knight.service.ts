@@ -1,11 +1,18 @@
 import { Injectable } from '@nestjs/common';
 import {BaseService} from "@/domain/base-service";
-import {IKnightDto, KnightEntity} from "@/domain/knight/Knight.entity";
+import {KnightEntity} from "@/domain/knight/Knight.entity";
 import {KnightRepo} from "@/domain/knight/Knight.repo";
+import {SaveKnightSO} from "@/domain/knight/knight.dto";
 
 @Injectable()
 export class SaveKnightService extends BaseService<any>{
-    async handle(dto: IKnightDto): Promise<any> {
+    constructor(
+        private knightRepo: KnightRepo
+    ) {
+        super();
+    }
+    
+    async handle(dto: SaveKnightSO): Promise<any> {
         const knight = new KnightEntity(
             dto.name,
             dto.nickname,
@@ -16,8 +23,7 @@ export class SaveKnightService extends BaseService<any>{
             dto.id
         )
         
-        const repo = new KnightRepo(); // todo - colocar como INJECTABLE???
-        await repo.save(knight)
+        await this.knightRepo.save(knight)
         
         let txt = (dto.id) ? 'update' : 'create'
         return Promise.resolve(txt+" success");

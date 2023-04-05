@@ -1,14 +1,11 @@
-export interface WeaponDto {
-    name: string,
-    mod: number,
-    attr: string,
-}
+import {IWeaponAttributes, WeaponModel} from "@/data/weapon.model";
 
-export class WeaponEntity implements WeaponDto {
+export class WeaponEntity implements WeaponModel {
     constructor(
         public name: string,
         public mod: number,
-        public attr: string,
+        public attr: IWeaponAttributes,
+        public equipped: boolean = false
     ) {
     }
 }

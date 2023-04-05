@@ -1,34 +1,24 @@
 import {Injectable} from '@nestjs/common';
 import {BaseService} from "@/domain/base-service";
-import {EKnightKeyAttributes, KnightEntity} from "@/domain/knight/Knight.entity";
-import {AttributesEntity} from "@/domain/knight/Attributes.entity";
-import {WeaponEntity} from "@/domain/weapon/Weapon.entity";
-
-export type KnightStatus = 'heroes'|'alive';
-
-export interface IReadKnightSO {
-    id?: number,
-    type: KnightStatus
-}
+import {KnightEntity} from "@/domain/knight/Knight.entity";
+import {IReadKnightSO, KnightDto} from "@/domain/knight/knight.dto";
+import {KnightRepo} from "@/domain/knight/Knight.repo";
+import {EntityDtoAdapter} from "@/domain/EntityDtoAdapter";
 
 @Injectable()
 export class ReadKnightService extends BaseService<any>{
-    async handle(dto: IReadKnightSO): Promise<any> {
-        const sword = new WeaponEntity('sword', 3, "strength")
+    constructor(
+        private knightRepo: KnightRepo,
+        private dtoAdapter: EntityDtoAdapter<KnightEntity, KnightDto>
+    ) {
+        super();
+    }
+    
+    async handle(so: IReadKnightSO): Promise<any> {
+        const knights = await this.knightRepo.get()
         
-        const knight = new KnightEntity(
-            "Fake knight",
-            "pãogordo",
-            "1988-09-24",
-            [sword],
-            new AttributesEntity(),
-            EKnightKeyAttributes.STRENGTH, // todo - de onde vem isso?
-        )
+        const dtos = this.dtoAdapter.handle(knights);
         
-        knight.equipWeapon(1)
-        
-        return Promise.resolve(
-            knight
-        );
+        return Promise.resolve(dtos);
     }
 }

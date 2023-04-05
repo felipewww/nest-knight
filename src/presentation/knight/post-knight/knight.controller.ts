@@ -1,10 +1,11 @@
-import {All, Body, Controller, Delete, Get, Param, Post, Put, Query} from '@nestjs/common';
+import {Body, Controller, Delete, Get, Param, Post, Put, Query} from '@nestjs/common';
 import {DeleteKnightService} from "@/domain/knight/delete-knight/delete-knight.service";
-import {IReadKnightSO, KnightStatus, ReadKnightService} from "@/domain/knight/read-knight/read-knight.service";
+import {ReadKnightService} from "@/domain/knight/read-knight/read-knight.service";
 import {SaveKnightService} from "@/domain/knight/save-knight/save-knight.service";
-import {IKnightDto} from "@/domain/knight/Knight.entity";
+import {KnightViewModel} from "@/presentation/knight/knight.viewmodel";
+import {IReadKnightSO, KnightStatus} from "@/domain/knight/knight.dto";
 
-@Controller('knight')
+@Controller('knights')
 export class KnightController {
     constructor(
         private readonly deleteKnightService: DeleteKnightService,
@@ -13,9 +14,10 @@ export class KnightController {
     ) {
     }
     
+    // todo pipe de validação "weapons attributes keyAttribute"
     @Post()
     async storeKnight(
-        @Body() body: Omit<IKnightDto, 'id'>
+        @Body() body: Omit<KnightViewModel, 'id'>
     ) {
         return this.saveKnightService.handle(body)
     }
@@ -23,7 +25,7 @@ export class KnightController {
     @Put(':id')
     async saveKnight(
         @Param('id') id: number,
-        @Body() body: Pick<IKnightDto, 'nickname'>
+        @Body() body: Pick<KnightViewModel, 'nickname'>
     ) {
         return this.saveKnightService.handle({
             id,
