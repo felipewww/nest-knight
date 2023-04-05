@@ -1,10 +1,9 @@
-import {Body, Controller, Delete, Get, HttpStatus, Param, Post, Put, Query, Res, UsePipes} from '@nestjs/common';
+import {Body, Controller, Delete, Get, Param, Post, Put, Query, UsePipes} from '@nestjs/common';
 import {DeleteKnightService} from "@/domain/knight/delete-knight/delete-knight.service";
 import {ReadKnightService} from "@/domain/knight/read-knight/read-knight.service";
 import {SaveKnightService} from "@/domain/knight/save-knight/save-knight.service";
 import {KnightViewModel, StoreKnightVMSchema, UpdateKnightVMSchema} from "@/presentation/knight/knight.viewmodel";
 import {IReadKnightSO, KnightStatus} from "@/domain/knight/knight.dto";
-import { Response } from 'express';
 import {ObjectValidationPipe} from "@/presentation/pipes/ObjectValidationPipe";
 
 @Controller('knights')
