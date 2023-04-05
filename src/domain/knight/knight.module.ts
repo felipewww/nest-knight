@@ -7,6 +7,9 @@ import {KnightSource} from "@/data/knight.model";
 import {EntityDtoAdapter} from "@/domain/EntityDtoAdapter";
 
 @Module({
+    imports: [
+        KnightSource,
+    ],
     providers: [DeleteKnightService,
         ReadKnightService,
         SaveKnightService,

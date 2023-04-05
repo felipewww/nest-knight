@@ -3,12 +3,8 @@ import {Injectable} from "@nestjs/common";
 
 @Injectable()
 export class EntityDtoAdapter<ENT extends BaseEntity<DTO>, DTO> {
-    // private dtos: Array<DTO> = [];
-    
     constructor(
-        // private entities: Array<ENT>
     ) {
-    
     }
     
     handle(entities: Array<ENT>) {

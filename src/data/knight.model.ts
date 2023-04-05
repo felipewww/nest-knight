@@ -1,9 +1,9 @@
-import {IWeaponAttributes, WeaponModel} from "@/data/weapon.model";
+import {WeaponModel} from "@/data/weapon.model";
 import {Attributes, EKnightKeyAttributes} from "@/domain/knight/knight.dto";
-import {Injectable} from "@nestjs/common";
+import {BaseModel} from "@/data/base-model";
 
 export interface KnightModel {
-    id?: number
+    _id?: any
     name: string
     nickname: string
     birthday: string
@@ -12,34 +12,6 @@ export interface KnightModel {
     keyAttribute: EKnightKeyAttributes
 }
 
-@Injectable()
-export class KnightSource {
-    constructor() {
-    }
-    
-    async get(id?: number): Promise<Array<KnightModel>> {
-        const sourceRes: Array<KnightModel> = [{
-            id: 1,
-            name: 'fake1',
-            nickname: 'fake1nick',
-            birthday: "1988-09-24",
-            weapons: [{
-                name: 'sword',
-                mod: 3,
-                attr: IWeaponAttributes.Strength,
-                equipped: false
-            }],
-            attributes: {
-                strength: 0,
-                dexterity: 0,
-                constitution: 0,
-                intelligence: 0,
-                wisdom: 0,
-                charisma: 0,
-            },
-            keyAttribute: EKnightKeyAttributes.Strength,
-        }]
-        
-        return Promise.resolve(sourceRes)
-    }
+export class KnightSource extends BaseModel<KnightModel> {
+    collectionName = 'knights'
 }

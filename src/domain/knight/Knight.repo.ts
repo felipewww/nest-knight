@@ -11,17 +11,18 @@ export class KnightRepo {
     }
     
     async save(knight: KnightEntity) {
-        if (knight.id) {
-            console.log('should update only NICKNAME')
+        if (knight._id) {
+            return this.source.update(
+                { nickname: knight.nickname },
+                knight._id
+            )
         } else {
-            console.log('should create a new knight!')
+            return this.source.create(knight)
         }
-        
-        return Promise.resolve(true)
     }
     
     async get(id?: number) {
-        const knightsModel = await this.source.get(id)
+        const knightsModel = await this.source.find(id)
         
         const entities: Array<KnightEntity> = []
         for (let row of knightsModel) {

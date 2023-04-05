@@ -33,7 +33,7 @@ export type Attributes = {
 }
 
 export interface KnightDto {
-    id: number,
+    _id: number,
     name: string,
     age: number,
     weapons: Array<KnightWeaponSO>,

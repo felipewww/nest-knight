@@ -28,7 +28,7 @@ export class KnightController {
         @Body() body: Pick<KnightViewModel, 'nickname'>
     ) {
         return this.saveKnightService.handle({
-            id,
+            _id: id,
             nickname: body.nickname,
             name: null,
             birthday: null,

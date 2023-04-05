@@ -11,7 +11,7 @@ export class KnightEntity extends BaseEntity<KnightDto> implements KnightModel {
         public weapons: Array<KnightWeaponSO>,
         public attributes: Attributes,
         public keyAttribute: EKnightKeyAttributes,
-        public id?: number,
+        public _id?: number,
     ) {
         super();
         
@@ -31,8 +31,8 @@ export class KnightEntity extends BaseEntity<KnightDto> implements KnightModel {
     
     public mountDto() {
         return {
-            id: this.id,
-            name: this.name,
+            _id: this._id,
+            name: this.nickname, // a prop da api é NOME, mas imaginei ser o nickname pelo fato de poder fazer update
             age: this.calcAge(),
             weapons: this.weapons,
             keyAttribute: this.keyAttribute,
@@ -53,6 +53,7 @@ export class KnightEntity extends BaseEntity<KnightDto> implements KnightModel {
         return 10 //todo
     }
     
+    // todo - precisa disso ainda?
     public equipWeapon(pos: number) {
         if (this.weapons[pos]) {
             this.weapons[pos].equipped = true;
@@ -68,6 +69,6 @@ export function KnightEntityFactory(model: KnightModel) {
         model.weapons,
         model.attributes,
         model.keyAttribute,
-        model.id
+        model._id
     )
 }

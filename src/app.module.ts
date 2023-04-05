@@ -1,17 +1,16 @@
 import { Module } from '@nestjs/common';
-import {MongooseModule} from "@nestjs/mongoose";
-import {ConfigModule} from "@nestjs/config";
-import {KnightPresenterModule} from "@/presentation/knight/knight-presenter.module";
+import { InfraModule } from './infra/infra.module';
+import { PresentationModule } from './presentation/presentation.module';
 
 @Module({
   imports: [
-      ConfigModule.forRoot({
-          isGlobal: true,
-      }),
-      MongooseModule.forRoot('mongodb://localhost/nest'),
-      KnightPresenterModule,
+      InfraModule,
+      PresentationModule,
   ],
   controllers: [],
   providers: [],
 })
-export class AppModule {}
+export class AppModule {
+    constructor() {
+    }
+}

@@ -5,7 +5,8 @@ import {KnightRepo} from "@/domain/knight/Knight.repo";
 import {SaveKnightSO} from "@/domain/knight/knight.dto";
 
 @Injectable()
-export class SaveKnightService extends BaseService<any>{
+export class SaveKnightService extends BaseService<any> {
+    // todo - confirmar tipo de retorno
     constructor(
         private knightRepo: KnightRepo
     ) {
@@ -20,12 +21,12 @@ export class SaveKnightService extends BaseService<any>{
             dto.weapons,
             dto.attributes,
             dto.keyAttribute,
-            dto.id
+            dto._id
         )
         
         await this.knightRepo.save(knight)
         
-        let txt = (dto.id) ? 'update' : 'create'
+        let txt = (dto._id) ? 'update' : 'create'
         return Promise.resolve(txt+" success");
     }
 }

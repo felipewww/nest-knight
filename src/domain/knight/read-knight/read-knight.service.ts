@@ -6,7 +6,7 @@ import {KnightRepo} from "@/domain/knight/Knight.repo";
 import {EntityDtoAdapter} from "@/domain/EntityDtoAdapter";
 
 @Injectable()
-export class ReadKnightService extends BaseService<any>{
+export class ReadKnightService extends BaseService<Array<KnightDto>> {
     constructor(
         private knightRepo: KnightRepo,
         private dtoAdapter: EntityDtoAdapter<KnightEntity, KnightDto>
