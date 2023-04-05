@@ -67,7 +67,7 @@ export class KnightEntity extends BaseEntity<KnightDto> implements KnightModel {
             xp = Math.floor((age - 7) * Math.pow(22, 1.45))
         }
         
-        return xp; //todo
+        return xp;
     }
     
     private getEquippedWeapon() {
