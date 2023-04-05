@@ -29,15 +29,53 @@ export class KnightEntity extends BaseEntity<KnightDto> implements KnightModel {
     }
     
     private calcAge() {
-        return 10 //todo
+        const now = new Date();
+        const birthDate = new Date(this.birthday);
+        let age = now.getFullYear() - birthDate.getFullYear();
+        
+        const birthMonth = now.getMonth() - birthDate.getMonth();
+        if (
+            birthMonth < 0
+            || (
+                birthMonth === 0
+                && now.getDate() < birthDate.getDate()
+            )
+        ) {
+            age--;
+        }
+        
+        return age;
     }
     
     private calcAttack() {
-        return 10 //todo
+        const modAttr = this.attributes[this.keyAttribute];
+        const equippedWeapon = this.getEquippedWeapon();
+        
+        let modWeapon = 0;
+        if (equippedWeapon) {
+            modWeapon = equippedWeapon.mod
+        }
+        
+        return 10 + modAttr + modWeapon;
     }
     
     private calcExp() {
-        return 10 //todo
+        let age = this.calcAge();
+        let xp = 0;
+        
+        if (age >= 7) {
+            xp = Math.floor((age - 7) * Math.pow(22, 1.45))
+        }
+        
+        return xp; //todo
+    }
+    
+    private getEquippedWeapon() {
+        for (let w of this.weapons) {
+            if (w.equipped) {
+                return w;
+            }
+        }
     }
 }
 

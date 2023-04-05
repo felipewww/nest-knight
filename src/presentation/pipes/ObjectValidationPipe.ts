@@ -8,9 +8,6 @@ export class ObjectValidationPipe implements PipeTransform {
     transform(value: any, metadata: ArgumentMetadata) {
         const { error } = this.schema.validate(value);
         
-        console.log('TRANSFORM............')
-        console.log(value)
-        console.log(error)
         if (error) {
             throw new BadRequestException(error.details[0].message);
         }

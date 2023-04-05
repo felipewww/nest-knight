@@ -15,16 +15,9 @@ export abstract class BaseModel<IMODEL extends {_id?: any}> {
     public async find(id?: any) {
         const filter: {[key: string]: any} = {}
         
-        let hex = /[0-9A-Fa-f]{6}/g;
-        
-        // if (id && !hex.test(id)) {
-        //     return Promise.resolve([])
-        // }
-        //
-        // if (id) {
-        //     // filter._id = new ObjectId(id);
-        // }
-        filter._id = new mongoose.Types.ObjectId(id);
+        if (id) {
+            filter._id = new mongoose.Types.ObjectId(id);
+        }
         
         const sourceRes = await this.db().find(filter).toArray() as Array<any>;
         return sourceRes as Array<IMODEL>

@@ -42,7 +42,6 @@ export class KnightController {
     
     @Get(':id?')
     async getKnights(
-        @Res() res: Response,
         @Param('id') id?: number,
         @Query('filter') filter?: KnightStatus,
     ) {
@@ -51,7 +50,7 @@ export class KnightController {
             type: (filter) ? filter : 'alive'
         }
         
-        await this.readKnightService.handle(serviceObject);
+        return this.readKnightService.handle(serviceObject);
     }
     
     @Delete(':id')
