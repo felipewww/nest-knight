@@ -1,6 +1,6 @@
 export enum IWeaponAttributes {
     Strength= 'strength',
-    Distance= 'distance', //todo - manter distance de exemplo?
+    Distance= 'distance',
 }
 
 export interface WeaponModel {

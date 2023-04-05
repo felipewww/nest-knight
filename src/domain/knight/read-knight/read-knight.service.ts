@@ -16,15 +16,15 @@ export class ReadKnightService extends BaseService<Array<KnightDto>> {
         super();
     }
     
-    async handle(so: IReadKnightSO): Promise<any> {
+    async handle(serviceObject: IReadKnightSO): Promise<Array<KnightDto>> {
         
         let dtos: Array<KnightDto>;
         
-        if (so.type === 'heroes') {
-            const heroes = await this.heroRepo.get(so.id)
+        if (serviceObject.type === 'heroes') {
+            const heroes = await this.heroRepo.get(serviceObject.id)
             dtos = this.dtoAdapter.handle(heroes);
         } else {
-            const knights = await this.knightRepo.get(so.id);
+            const knights = await this.knightRepo.get(serviceObject.id);
             dtos = this.dtoAdapter.handle(knights);
         }
         

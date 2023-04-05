@@ -16,13 +16,12 @@ export class KnightController {
     ) {
     }
     
-    // todo pipe de validação "weapons attributes keyAttribute"
     @Post()
     @UsePipes(new ObjectValidationPipe(StoreKnightVMSchema()))
     async storeKnight(
         @Body() body: Omit<KnightViewModel, 'id'>
     ) {
-        return this.saveKnightService.handle(body)
+        await this.saveKnightService.handle(body)
     }
     
     @Put(':id')
@@ -30,7 +29,7 @@ export class KnightController {
         @Param('id') id: number,
         @Body(new ObjectValidationPipe(UpdateKnightVMSchema())) body: Pick<KnightViewModel, 'nickname'>
     ) {
-        return this.saveKnightService.handle({
+        await this.saveKnightService.handle({
             _id: id,
             nickname: body.nickname,
             name: null,
@@ -45,11 +44,11 @@ export class KnightController {
     async getKnights(
         @Res() res: Response,
         @Param('id') id?: number,
-        @Query('filter') filter?: KnightStatus, //todo colocar pipe validando filtro aliv/hero
+        @Query('filter') filter?: KnightStatus,
     ) {
         const serviceObject: IReadKnightSO = {
             id: id,
-            type: (filter) ? filter : 'alive' // todo - fazer isso num pipe?
+            type: (filter) ? filter : 'alive'
         }
         
         await this.readKnightService.handle(serviceObject);
@@ -59,6 +58,6 @@ export class KnightController {
     async deleteKnight(
         @Param('id') id?: number,
     ) {
-        return this.deleteKnightService.handle({id})
+        await this.deleteKnightService.handle({id})
     }
 }

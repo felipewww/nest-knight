@@ -16,7 +16,7 @@ import {HeroRepo} from "@/domain/knight/Hero.repo";
         ReadKnightService,
         SaveKnightService,
         KnightRepo,
-        KnightSource, //todo - isso poderia estar num modulo em DATA, certo?
+        KnightSource,
         HeroRepo,
         HeroSource,
         EntityDtoAdapter

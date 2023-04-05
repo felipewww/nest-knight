@@ -13,12 +13,12 @@ export class DeleteKnightService extends BaseService<boolean> {
         super();
     }
     
-    async handle(dto: IDeleteKnightSO): Promise<boolean> {
-        const knight = await this.knightRepo.get(dto.id)
+    async handle(serviceObject: IDeleteKnightSO): Promise<boolean> {
+        const knight = await this.knightRepo.get(serviceObject.id)
         
         if (knight.length) {
             await this.heroRepo.save(knight[0]);
-            await this.knightRepo.delete(dto.id)
+            await this.knightRepo.delete(serviceObject.id)
         }
         
         return Promise.resolve(true);

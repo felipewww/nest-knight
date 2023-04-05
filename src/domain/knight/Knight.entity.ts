@@ -14,20 +14,7 @@ export class KnightEntity extends BaseEntity<KnightDto> implements KnightModel {
         public _id?: number,
     ) {
         super();
-        
-        // todo - testar leitura de weapon equiped do banco se vem corretamente
-        this.initWeapons();
     }
-    
-    // todo - ainda precisa mesmo inicializar?
-    private initWeapons() {
-        for (const weapon of this.weapons) {
-            if (weapon.equipped === undefined) {
-                weapon.equipped = false
-            }
-        }
-    }
-    
     
     public mountDto() {
         return {
@@ -51,13 +38,6 @@ export class KnightEntity extends BaseEntity<KnightDto> implements KnightModel {
     
     private calcExp() {
         return 10 //todo
-    }
-    
-    // todo - precisa disso ainda?
-    public equipWeapon(pos: number) {
-        if (this.weapons[pos]) {
-            this.weapons[pos].equipped = true;
-        }
     }
 }
 
